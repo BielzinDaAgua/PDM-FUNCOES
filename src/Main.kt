@@ -1,11 +1,11 @@
 val materiasENotas = mutableMapOf<String, MutableList<Double>>()
 
 fun adicionarDisciplina(materia: String, notas: MutableList<Double> = mutableListOf()): Boolean {
-    return materiasENotas.put(materia, notas) != null
+    return MateriasENota.put(materia, notas) != null
 }
 
 fun adicionarNota(materia: String, nota: Double): Boolean {
-    val notasDaMateria = materiasENotas[materia]
+    val notasDaMateria = MateriasENota[materia]
 
     return if (notasDaMateria != null) {
         notasDaMateria.add(nota)
@@ -16,10 +16,10 @@ fun adicionarNota(materia: String, nota: Double): Boolean {
 }
 
 fun mostrarNotas(materia: String) {
-    if (!materiasENotas.containsKey(materia)) {
+    if (!MateriasENota.containsKey(materia)) {
         println("Matéria $materia não encontrada")
     } else {
-        val listaNotas = materiasENotas[materia]
+        val listaNotas = MateriasENota[materia]
 
         if (listaNotas != null) {
             var cont = 1
@@ -39,7 +39,7 @@ fun mostrarNotas(materia: String) {
 }
 
 fun adicionarVariasNotas(materia: String, vararg nota: Double): Boolean {
-    val notasDaMateria = materiasENotas[materia] ?: return false
+    val notasDaMateria = MateriasENota[materia] ?: return false
     notasDaMateria.addAll(nota.toList())
     return true
 }
@@ -48,7 +48,7 @@ fun calcularMedia(vararg materias: String): Double {
     var totalNotas = 0.0
     var totalDisciplinas = 0
     for (materia in materias) {
-        val notas = materiasENotas[materia] ?: continue
+        val notas = MateriasENota[materia] ?: continue
         totalNotas += notas.sum()
         totalDisciplinas++
     }
